@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Back End Assessment</title>
+  </head>
+  <body class="container">
+    <button id="complimentButton">Get a compliment</button>
+    <button id="fortuneButton">Get a fortune</button>
+    <button id="colorPick">Get a color for the day</button>
+    <br>
+    <label>Select an intention to practice today:</label>
+    <select name="intention" id="intention">
+      <option value="">Please choose an intention.</option>
+      <option value="challenges">I will face all my challenges today with a calm mind and conviction.</option>
+      <option value="lead">I will do my best to lead by example.</option>
+      <option value="positve">I will look for the positive side in negative situations.</option>
+      <option value="try">I won’t be afraid to try difficult things.</option>
+      <option value="accept">I accept myself as enough.</option>
+      <option value="grateful">I intend to be grateful for three things today.</option>
+    </select>
+    <h2 id="pick"></h2>
+
+    <form>
+      <input
+        type="text"
+        id="word1"
+        placeholder="Word 1 of the day"/>
+      <input
+        type="text"
+        id="word2"
+        placeholder="Word 2 of the day"/> 
+      <input
+        type="text"
+        id="word3"
+        placeholder="Word 3 of the day"/>
+        <button id="word">add word</button>
+    </form>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      document.getElementById("complimentButton").onclick = function () {
+        axios.get("http://localhost:4000/api/compliment/")
+            .then(function (response) {
+              const data = response.data;
+              alert(data);
+            });
+      };
+//Fortune front end
+      document.getElementById("fortuneButton").onclick = function () {
+        axios.get("http://localhost:4000/api/fortune/")
+        .then(function (response) {
+          const fortune = response.data;
+          alert(fortune);
+        });
+      };
+
+//color front end
+      document.getElementById("colorPick").onclick = function () {
+        axios.get("http://localhost:4000/api/color/")
+        .then(function (response) {
+          const color = response.data;
+          alert(color);
+        });
+      };
+
+//word front end
+document.getElementById("word").onclick = function () {
+        axios.post("http://localhost:4000/api/word/")
+        .then(function (response) {
+          const dayWords = response.data;
+          alert(dayWords);
+        });
+      };
+
+// intention front end 
+      function getSelectedValue(){
+      var selectedValue = document.getElementById("intention").value
+      axios.get("http://localhost:4000/api/intention/")
+    }
+
+
+  
+
+    </script>
+  </body>
+</html>
